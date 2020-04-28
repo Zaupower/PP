@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/FP9/FP9.iml" filepath="$PROJECT_DIR$/FP9/FP9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha1Ex1/Ficha1Ex1.iml" filepath="$PROJECT_DIR$/Ficha1Ex1/Ficha1Ex1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha1Ex2/Ficha1Ex2.iml" filepath="$PROJECT_DIR$/Ficha1Ex2/Ficha1Ex2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha1Ex5/Ficha1Ex5.iml" filepath="$PROJECT_DIR$/Ficha1Ex5/Ficha1Ex5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha2Ex1/Ficha2Ex1.iml" filepath="$PROJECT_DIR$/Ficha2Ex1/Ficha2Ex1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha2Ex2/Ficha2Ex2.iml" filepath="$PROJECT_DIR$/Ficha2Ex2/Ficha2Ex2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha2Ex3/Ficha2Ex3.iml" filepath="$PROJECT_DIR$/Ficha2Ex3/Ficha2Ex3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha2Ex4/Ficha2Ex4.iml" filepath="$PROJECT_DIR$/Ficha2Ex4/Ficha2Ex4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha2Ex5/Ficha2Ex5.iml" filepath="$PROJECT_DIR$/Ficha2Ex5/Ficha2Ex5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha2Ex6/Ficha2Ex6.iml" filepath="$PROJECT_DIR$/Ficha2Ex6/Ficha2Ex6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha3Ex1/Ficha3Ex1.iml" filepath="$PROJECT_DIR$/Ficha3Ex1/Ficha3Ex1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha3Ex2/Ficha3Ex2.iml" filepath="$PROJECT_DIR$/Ficha3Ex2/Ficha3Ex2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha3Ex3/Ficha3Ex3.iml" filepath="$PROJECT_DIR$/Ficha3Ex3/Ficha3Ex3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha3Ex4/Ficha3Ex4.iml" filepath="$PROJECT_DIR$/Ficha3Ex4/Ficha3Ex4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha3Ex5/Ficha3Ex5.iml" filepath="$PROJECT_DIR$/Ficha3Ex5/Ficha3Ex5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha3Ex6/Ficha3Ex6.iml" filepath="$PROJECT_DIR$/Ficha3Ex6/Ficha3Ex6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha3Ex7/Ficha3Ex7.iml" filepath="$PROJECT_DIR$/Ficha3Ex7/Ficha3Ex7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha3Ex8/Ficha3Ex8.iml" filepath="$PROJECT_DIR$/Ficha3Ex8/Ficha3Ex8.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha4Ex1/Ficha4Ex1.iml" filepath="$PROJECT_DIR$/Ficha4Ex1/Ficha4Ex1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha5Ex1/Ficha5Ex1.iml" filepath="$PROJECT_DIR$/Ficha5Ex1/Ficha5Ex1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha5Ex2/Ficha5Ex2.iml" filepath="$PROJECT_DIR$/Ficha5Ex2/Ficha5Ex2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ficha7Ex1/Ficha7Ex1.iml" filepath="$PROJECT_DIR$/Ficha7Ex1/Ficha7Ex1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NetBeansTest/NetBeansTest.iml" filepath="$PROJECT_DIR$/NetBeansTest/NetBeansTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/PP.iml" filepath="$PROJECT_DIR$/.idea/PP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pp_fp08/pp_fp08.iml" filepath="$PROJECT_DIR$/pp_fp08/pp_fp08.iml" />
+    </modules>
+  </component>
+</project>
