@@ -4,6 +4,10 @@ import enums.ProgrammerType;
 import java.time.LocalDate;
 
 public class JavaProgrammer extends Colaborator{
+
+    /**
+     *
+     */
     private int code;
     private int programmingYers;
     private String projectName;
@@ -13,6 +17,10 @@ public class JavaProgrammer extends Colaborator{
         super(name, birthDate, address, citizenCard, vatNumber, baseSalary);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     double setSalary() {
         double tmpSalary = getBaseSalary() * 1.05;
@@ -24,6 +32,10 @@ public class JavaProgrammer extends Colaborator{
         return tmpSalary;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "JavaProgrammer{" +

@@ -3,6 +3,9 @@ import enums.Habilitacoes;
 
 import java.time.LocalDate;
 
+/**
+ *
+ */
 public class Administrative extends Colaborator{
 
     private String initials;

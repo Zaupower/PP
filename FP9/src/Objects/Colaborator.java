@@ -4,6 +4,10 @@ import java.time.LocalDate;
  * Super Class Colaborator
  */
 abstract class Colaborator {
+
+    /**
+     *
+     */
     private String name;
     private LocalDate birthDate;
     private String address;
@@ -11,6 +15,15 @@ abstract class Colaborator {
     private int vatNumber;
     private double baseSalary;
 
+    /**
+     *
+     * @param name
+     * @param birthDate
+     * @param address
+     * @param citizenCard
+     * @param vatNumber
+     * @param baseSalary
+     */
     public Colaborator(String name, LocalDate birthDate,
                        String address, int citizenCard,
                        int vatNumber, double baseSalary) {
@@ -38,6 +51,10 @@ abstract class Colaborator {
         return baseSalary;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Colaborator{" +
