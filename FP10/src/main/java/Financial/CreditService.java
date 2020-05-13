@@ -12,6 +12,6 @@ package Financial;
 interface CreditService {
     double getAnnualRate();
     void setAnnualRate(double r);
-    double computeMonthlyPayment(double ammount);
+    double computeMonthlyPayment(double ammount, int meses);
     
 }

@@ -1,3 +1,5 @@
+package Objects;
+
 import enums.ContractType;
 import enums.Habilitacoes;
 

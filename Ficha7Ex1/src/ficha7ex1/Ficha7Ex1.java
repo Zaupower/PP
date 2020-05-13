@@ -27,7 +27,7 @@ public class Ficha7Ex1 {
         MontaionBikeSuspension mm = MontaionBikeSuspension.DUPLA;
         //System.out.println(MountainBikeSuspension.MountainBikeSuspensionToString(mm));
         
-        MontainBike b = new MontainBike(0, mm, 0, 0, "P", 0, BrakeType.P, Material.CARBONO, 0, 0);
+        //MontainBike b = new MontainBike(0, mm, 0, 0, "P", 0, BrakeType.P, Material.CARBONO, 0, 0);
         
         b.addtool(BikeTools.GPS);
         b.addtool(BikeTools.BOMBA_PRESSAO);

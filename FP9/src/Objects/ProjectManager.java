@@ -1,9 +1,13 @@
+package Objects;
+
+import Objects.Colaborator;
+
 import java.time.LocalDate;
 
 /**
  *
  */
-public class ProjectManager extends Colaborator{
+public class ProjectManager extends Colaborator {
     private int code;
     private String projects;
     private LocalDate contractDate;
@@ -17,8 +21,11 @@ public class ProjectManager extends Colaborator{
      * @param vatNumber
      * @param baseSalary
      */
-    public ProjectManager(String name, LocalDate birthDate, String address, int citizenCard, int vatNumber, double baseSalary) {
+    public ProjectManager(String name, LocalDate birthDate, String address, int citizenCard, int vatNumber, double baseSalary, int code, String projects, LocalDate contractDate) {
         super(name, birthDate, address, citizenCard, vatNumber, baseSalary);
+        this.code = code;
+        this.projects = projects;
+        this.contractDate = contractDate;
     }
 
     /**

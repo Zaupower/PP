@@ -5,96 +5,60 @@
  */
 package Financial;
 
+import Ex3.SuperMarket;
+import com.mycompany.fp10.GasStation;
+
+import java.util.Calendar;
+
 /**
  *
  * @author marce
  */
-public class HiperMarket implements HiperMarketService{
+public abstract class HiperMarket extends SuperMarket implements HiperMarketService{
 
-    double coffePrice;
-    double potatoesPrice;
-    double anualRate;
-    double gasPrice;
+    private double coffePrice;
+    private double anualRate;
+    private double gasPrice;
+    private int clientPoints;
+    private double total;
 
-    public HiperMarket(double coffePrice, double potatoesPrice, double anualRate, double gasPrice) {
+    public HiperMarket(double coffePrice, double anualRate, double gasPrice, double potatoesPrice, String name, int vatNumber) {
+        super(potatoesPrice, name, vatNumber);
         this.coffePrice = coffePrice;
-        this.potatoesPrice = potatoesPrice;
         this.anualRate = anualRate;
         this.gasPrice = gasPrice;
     }
-    
-    
-    
-    //------------------------CoffeStation------------------------//
-    @Override
-    public double getCoffePrice() {
-        return this.coffePrice;
+
+
+    public abstract int getPoints(double valor);
+
+    public boolean morepoints(double valor, HiperMarket h2){
+        int a,b = 0;
+        boolean t = false;
+        a=this.getPoints(valor);
+        b=h2.getPoints(valor);
+        if (a<b){
+            t=true;
+        }else if (a>b){
+            t=false;
+        }
+        return t;
     }
 
-    @Override
-    public void setCoffePrice(double p) {
-        this.coffePrice = p;
-    }
+    public GasStation compareAll(GasStation[] bombas){
+        GasStation tmp = null;
+        for (int i =0; i<bombas.length-2; i++){
+            for (int j = 1; j< bombas.length-1;j++){
+                if (bombas[i].getGasPrice() < bombas[j].getGasPrice()){
+                    tmp = bombas[i];
+                }else {
+                    tmp= bombas[j];
+                }
+            }
+        }
 
-    @Override
-    public double getCoffeTotal(int coffes) {
-        return this.coffePrice * coffes;
+        return  tmp;
     }
-
- //------------------------CoffeStation------------------------//
-    
- //------------------------SuperMarket------------------------//
-    @Override
-    public double getPotatoesPrice() {
-        return this.potatoesPrice;
-    }
-
-    @Override
-    public void setPotatoesPrice(double p) {
-        this.potatoesPrice = p;
-    }
-
-    @Override
-    public double getMarketTotal(double kilos) {
-        return this.potatoesPrice * kilos;
-    }
-   //------------------------SupoerMarket------------------------//
-    
-    
-    //------------------------Loan------------------------//
-    @Override
-    public double getAnnualRate() {
-        return this.anualRate;
-    }
-
-    @Override
-    public void setAnnualRate(double r) {
-        this.anualRate = r;
-    }
-
-    @Override
-    public double computeMonthlyPayment(double ammount) {
-        return this.anualRate * ammount;
-    }
-
-    //------------------------Loan------------------------//
-    
-    //------------------------GasStation------------------------//
-    @Override
-    public double getGasPrice() {
-        return this.gasPrice;
-    }
-
-    @Override
-    public void setGasPrice(double p) {
-    this.gasPrice = p;
-    }
-
-    @Override
-    public double getGasTotal(double litres) {
-        return this.gasPrice * litres;
-    }
-    
-       //------------------------GasStation------------------------//
-    
+    public  cabaz
+    //add mais 2 funcois
 }

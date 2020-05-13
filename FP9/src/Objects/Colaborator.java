@@ -1,9 +1,11 @@
+package Objects;
+
 import java.time.LocalDate;
 
 /**
  * Super Class Colaborator
  */
-abstract class Colaborator {
+public abstract class Colaborator {
 
     /**
      *

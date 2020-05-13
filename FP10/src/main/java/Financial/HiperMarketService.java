@@ -15,5 +15,5 @@ import com.mycompany.fp10.GasService;
  */
 public interface HiperMarketService extends CoffeService, MarketService,
 CreditService, GasService{
-    
+    double calculatePoints();
 }

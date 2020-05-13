@@ -36,7 +36,8 @@ public class SuperMarket extends Company implements MarketService{
 
     /**
      * 
-     * @return preco das batatas 
+     *
+     * @return preco das batatas
      */
     @Override
     public double getPotatoesPrice() {
