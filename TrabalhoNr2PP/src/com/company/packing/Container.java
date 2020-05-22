@@ -12,7 +12,8 @@ public class Container implements IContainer {
     transient int counter= 0;
     //Array Size nao passa para json por ser transient
     transient final int SIZE = 5;
-    //
+    //Boolean para verificar se o Container esta aberto
+    transient boolean close = false;
      int volume;
      String reference;
      int depth;
@@ -36,12 +37,18 @@ public class Container implements IContainer {
     @Override
     public boolean addItem(IItem iItem, IPosition iPosition, Color color) throws ContainerException {
         boolean test = true;
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] == null) {
-                items[i] = (Item) iItem;
-                items[i].setPosition(iPosition);
-                return true;
-            }
+        Item itemT = (Item) iItem;
+        itemT.setPosition(iPosition);
+        iItem.getVolume();
+            if(itemT.getVolume()< getOccupiedVolume()) {
+                for (int i = 0; i < items.length; i++) {
+                    if (items[i] == null) {
+                        items[i] = (Item) iItem;
+
+                        ++counter;
+                        return true;
+                    }
+                }
         }
         return false;
     }
@@ -55,7 +62,7 @@ public class Container implements IContainer {
         /**
          *  Verificar se existe o elemento e guardar a posicao
          */
-        for (int i=0; i<counter;i++){
+        for (int i=0; i<counter && items[i] != null; i++){
             System.out.println(items[i].getReference());
             System.out.println(iItem.getReference());
             if(items[i].getReference().equals(iItem.getReference())){
@@ -89,14 +96,15 @@ public class Container implements IContainer {
     @Override
     public void close() throws ContainerException, PositionException {
 
+        this.close = true;
     }
 
     @Override
     public IItem getItem(String s) {
         IItem tmp = null;
-        for (int i=0; i<items.length;i++){
-            if(items[i].getReference().equals(s)){
-                tmp = items[i];
+        for (int j = 0; j < items.length - 1 && items[j] != null; j++){
+            if(items[j].getReference().equals(s)){
+                tmp = items[j];
             }
         }
         return tmp;
@@ -105,7 +113,7 @@ public class Container implements IContainer {
     @Override
     public int getOccupiedVolume() {
         int tmp = 0;
-        for (int i=0; i<items.length;i++){
+        for (int i=0; i<items.length && items[i] != null; i++){
             tmp =+ items[i].getVolume();
         }
         return tmp;
@@ -116,9 +124,13 @@ public class Container implements IContainer {
         return new IItemPacked[0];
     }
 
+    /**
+     * Retorna a referencia do Container
+     * @return
+     */
     @Override
     public String getReference() {
-        return null;
+        return reference;
     }
 
     @Override
@@ -126,9 +138,13 @@ public class Container implements IContainer {
         return counter;
     }
 
+    /**
+     * Retorna a difenrca de volume total e volume total ocupado
+     * @return
+     */
     @Override
     public int getRemainingVolume() {
-        return 0;
+        return volume - getOccupiedVolume();
     }
 
     @Override
