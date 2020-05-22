@@ -36,20 +36,16 @@ public class Container implements IContainer {
     @Override
     public boolean addItem(IItem iItem, IPosition iPosition, Color color) throws ContainerException {
         boolean test = true;
-        if (counter == 0){
-
-            items[counter] = (Item) iItem;
-
-            counter++;
-        }else if(counter < SIZE && counter != 0 ){
-            items[counter] = (Item) iItem;
-            counter++;
-        }else {
-            test= false;
-            System.out.println("Posicao Invalida");
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] == null) {
+                items[i] = (Item) iItem;
+                items[i].setPosition(iPosition);
+                return true;
+            }
         }
-        return test;
+        return false;
     }
+
 
     @Override
     public boolean removeItem(IItem iItem) throws ContainerException {

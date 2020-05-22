@@ -63,6 +63,9 @@ public class Item implements IItem {
 
         return this.volume;
     }
+    public void setPosition(IPosition position){
+        this.position = position;
+    }
 
     @Override
     public String toString() {
