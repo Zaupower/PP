@@ -53,7 +53,12 @@ public class Container implements IContainer {
         return false;
     }
 
-
+    /**
+     * Pesquisa pelo Item refence no array de itens e seo achar
+     * @param iItem
+     * @return
+     * @throws ContainerException
+     */
     @Override
     public boolean removeItem(IItem iItem) throws ContainerException {
         int rmIndex =0;
@@ -76,13 +81,15 @@ public class Container implements IContainer {
         /**
          * mover os elementos seguintes para a posicao anterior
          */
-        for (j = rmIndex; j < items.length - 1 && items[j] != null; j++) {
-            items[j] = items[j + 1];
-        }
-        items[j] = null;
+        if (test){
+            for (j = rmIndex; j < items.length - 1 && items[j] != null; j++) {
+                items[j] = items[j + 1];
+            }
+            items[j] = null;
 
-        for (j = 0; j < items.length - 1 && items[j] != null; j++) {
-            System.out.println(items[j]);
+            for (j = 0; j < items.length - 1 && items[j] != null; j++) {
+                System.out.println(items[j]);
+            }
         }
 
         return test;
