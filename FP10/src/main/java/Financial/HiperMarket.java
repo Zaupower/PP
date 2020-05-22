@@ -59,6 +59,6 @@ public abstract class HiperMarket extends SuperMarket implements HiperMarketServ
 
         return  tmp;
     }
-    public  cabaz
+   // public  cabaz
     //add mais 2 funcois
 }
