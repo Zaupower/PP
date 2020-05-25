@@ -9,6 +9,7 @@ import com.company.packing.Position;
 import order.base.OrderStatus;
 import order.exceptions.ContainerException;
 import order.packing.Color;
+import order.packing.IItem;
 import order.packing.IPosition;
 import org.json.simple.parser.ParseException;
 import packing_gui.PackingGUI;
@@ -33,25 +34,34 @@ public class Main {
         //Gerar Position
         Position position = new Position(3,3,3);
         //Gerar Item
-        Item item = new Item("Ref1","DEscription",3,3,3,Color.blue,Color.fuchsia);
-        Item item1 = new Item("Ref11","DEscription",3,3,3,Color.blue,Color.fuchsia);
-        Item item2 = new Item("Ref12","DEscription",3,3,3,Color.blue,Color.fuchsia);
+        IItem item = new Item("Ref1","DEscription",3,3,3,Color.blue,Color.fuchsia);
+        IItem item1 = new Item("Ref11","DEscription",3,3,3,Color.blue,Color.fuchsia);
+        IItem item2 = new Item("Ref12","DEscription",3,3,3,Color.blue,Color.fuchsia);
         //Gerar Array de Item
-        Item[] items = new Item[1];
+        IItem[] items = new IItem[1];
         items[0] = item;
 
         //Gerar position
         //Position position = new Position(3,3,3);
         //Gerer Container
-        Container container = new Container(10,"C1",10, Color.blue,10,10,Color.gray, items);
-        container.addItem(item,position,Color.lime);
-        container.addItem(item1,position,Color.lime);
-        container.addItem(item2,position,Color.lime);
-        container.removeItem(item);
-        //Gerar Array de containers
-        Container[] containers = new Container[1];
-        containers[0] = container;
 
+        Container container = new Container(500,"C1",10, Color.blue,10,10,Color.gray, items);
+        boolean t1 = container.addItem(item,position,Color.lime);
+        System.out.println("t1  "+ t1);
+
+        boolean t2 = container.addItem(item1,position,Color.lime);
+        System.out.println("t2  "+ t2);
+        boolean t3 =container.addItem(item2,position,Color.lime);
+        System.out.println("t3  "+ t3);
+        int occupiedVolume = container.getOccupiedVolume();
+        System.out.println("Occupied Volume : " + occupiedVolume);
+        System.out.println(item1.getVolume());
+        // container.removeItem(item);
+        //Gerar Array de containers
+        //Container[] containers = new Container[1];
+        //containers[0] = container;
+        IItem itemSearch = container.getItem("Ref11");
+        //System.out.println("Item REF11 pesquisado  " + itemSeaech.getVolume());
         //Gerar Order
         //Order order = new Order(1,destination,containers, OrderStatus.CLOSED,customer);
         //System.out.println(container.toString());

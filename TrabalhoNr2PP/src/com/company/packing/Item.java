@@ -59,9 +59,9 @@ public class Item implements IItem {
 
     @Override
     public int getVolume() {
-        this.volume = this.height * this.length * this.depth;
+        int tmp = this.height * this.length * this.depth;
 
-        return this.volume;
+        return tmp;
     }
     public void setPosition(IPosition position){
         this.position = position;

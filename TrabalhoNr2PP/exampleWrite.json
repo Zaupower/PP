@@ -1,1 +1,68 @@
-{"orderId":1,"destination":{"address":{"city":"Lixa","country":"Portugal","number":11,"State":"Porto","street":"Rua de Real"},"name":"Joana"},"containers":[{"volume":10,"reference":"C1","depth":10,"color":"blue","length":10,"height":10,"colorEdge":"gray","items":[{"reference":"Ref11","description":"DEscription","depth":3,"height":3,"length":3,"volume":0,"color":"blue","colorEdge":"fuchsia"},{"reference":"Ref12","description":"DEscription","depth":3,"height":3,"length":3,"volume":0,"color":"blue","colorEdge":"fuchsia"},null,null,null]}],"status":"CLOSED","customer":{"costumerId":22,"name":"Marcelo","address":{"city":"Lixa","country":"Portugal","number":11,"State":"Porto","street":"Rua de Real"},"billingAddress":{"city":"Lixa","country":"Portugal","number":11,"State":"Porto","street":"Rua de Real"}}}
+{
+  "orderId": 1,
+  "destination": {
+    "address": {
+      "city": "Lixa",
+      "country": "Portugal",
+      "number": 11,
+      "State": "Porto",
+      "street": "Rua de Real"
+    },
+    "name": "Joana"
+  },
+  "containers": [
+    {
+      "volume": 10,
+      "reference": "C1",
+      "depth": 10,
+      "color": "blue",
+      "length": 10,
+      "height": 10,
+      "colorEdge": "gray",
+      "items": [
+        {
+          "reference": "Ref11",
+          "description": "DEscription",
+          "depth": 3,
+          "height": 3,
+          "length": 3,
+          "volume": 0,
+          "color": "blue",
+          "colorEdge": "fuchsia"
+        },
+        {
+          "reference": "Ref12",
+          "description": "DEscription",
+          "depth": 3,
+          "height": 3,
+          "length": 3,
+          "volume": 0,
+          "color": "blue",
+          "colorEdge": "fuchsia"
+        },
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "status": "CLOSED",
+  "customer": {
+    "costumerId": 22,
+    "name": "Marcelo",
+    "address": {
+      "city": "Lixa",
+      "country": "Portugal",
+      "number": 11,
+      "State": "Porto",
+      "street": "Rua de Real"
+    },
+    "billingAddress": {
+      "city": "Lixa",
+      "country": "Portugal",
+      "number": 11,
+      "State": "Porto",
+      "street": "Rua de Real"
+    }
+  }
+}

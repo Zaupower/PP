@@ -21,7 +21,7 @@ public class Container implements IContainer {
      int length;
      int height;
      Color colorEdge;
-     Item[] items;
+     IItem[] items;
 
     public Container(int volume, String reference, int depth, Color color, int length, int height, Color colorEdge, IItem[] items) {
         this.volume = volume;
@@ -37,20 +37,24 @@ public class Container implements IContainer {
     @Override
     public boolean addItem(IItem iItem, IPosition iPosition, Color color) throws ContainerException {
         boolean test = true;
-        Item itemT = (Item) iItem;
-        itemT.setPosition(iPosition);
         iItem.getVolume();
-            if(itemT.getVolume()< getOccupiedVolume()) {
+        System.out.println("iItem Volume : "+iItem.getVolume());
+        System.out.println("Get Ocupied Volume "+getOccupiedVolume());
+        //itemT.getVolume() < getOccupiedVolume()
+            if(iItem.getVolume() < getOccupiedVolume()) {
                 for (int i = 0; i < items.length; i++) {
                     if (items[i] == null) {
                         items[i] = (Item) iItem;
 
                         ++counter;
-                        return true;
+                        test =  true;
                     }
                 }
         }
-        return false;
+        for (int j = 0; j < items.length && items[j] != null; j++) {
+            System.out.println(items[j]);
+        }
+        return test;
     }
 
     /**
@@ -81,7 +85,7 @@ public class Container implements IContainer {
         /**
          * mover os elementos seguintes para a posicao anterior
          */
-        if (test){
+        if (test == true){
             for (j = rmIndex; j < items.length - 1 && items[j] != null; j++) {
                 items[j] = items[j + 1];
             }
@@ -108,22 +112,37 @@ public class Container implements IContainer {
 
     @Override
     public IItem getItem(String s) {
-        IItem tmp = null;
+        Item tmp = null;
         for (int j = 0; j < items.length - 1 && items[j] != null; j++){
+            System.out.println(items[j].getReference());
             if(items[j].getReference().equals(s)){
-                tmp = items[j];
+                System.out.println(items[j].getReference());
+                tmp = (Item) items[j];
             }
         }
-        return tmp;
+        return (Item)tmp;
     }
 
     @Override
     public int getOccupiedVolume() {
         int tmp = 0;
+        int tmp2 = 0;
+        /*
+        System.out.println("Tamanho do array  " +items.length );
         for (int i=0; i<items.length && items[i] != null; i++){
             tmp =+ items[i].getVolume();
+        }*/
+
+        for (int i=0; i<items.length && items[i] != null; i++){
+
+            System.out.println(items[i].getVolume());
+            tmp = items[i].getVolume();
+            tmp2 += tmp;
         }
-        return tmp;
+
+
+        return tmp2;
+
     }
 
     @Override
