@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Packing;
 
 import order.packing.Color;
 import order.packing.IItem;

@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Packing;
 
 import com.company.Exceptions.PosException;
 import order.exceptions.PositionException;

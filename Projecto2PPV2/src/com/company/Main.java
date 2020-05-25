@@ -1,14 +1,18 @@
 package com.company;
 
+
 import com.company.Exceptions.ContException;
+import com.company.Packing.Container;
+import com.company.Packing.Item;
+import com.company.Packing.PackedItem;
+import com.company.Packing.Position;
 import order.exceptions.PositionException;
 import order.packing.Color;
 import order.packing.IItem;
 import order.packing.IItemPacked;
-import org.json.simple.parser.ParseException;
-import packing_gui.PackingGUI;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Arrays;
 
 public class Main {
@@ -68,7 +72,7 @@ public class Main {
             //GetPackedItems test
             IItemPacked[] iItemPackeds;
             iItemPackeds = container.iItemPackeds;
-            System.out.println("Main final:  "+Arrays.toString(iItemPackeds));
+            System.out.println("Main final:  "+ Arrays.toString(iItemPackeds));
 
             //get remaining volume
             System.out.println("Remaingin volume "+container.getRemainingVolume());
@@ -76,6 +80,7 @@ public class Main {
             //Verificar o "Verificador de posicoes"
 
             container.validate();
+            System.out.println(container.getNumberOfItems());
 
         //----------Test PackedItem----------//
 

@@ -1,16 +1,15 @@
-package com.company;
+package com.company.Packing;
 
 import com.company.Exceptions.ContException;
 import com.company.Exceptions.PosException;
-import order.exceptions.ContainerException;
-import order.exceptions.PositionException;
+import com.company.Packing.PackedItem;
 import order.packing.*;
 
 import java.util.Arrays;
 
 public class Container implements IContainer {
 
-    IItemPacked[] iItemPackeds = new IItemPacked[4];
+    public IItemPacked[] iItemPackeds = new IItemPacked[2];
     int volume;
     String reference;
     int depth;
@@ -118,7 +117,7 @@ public class Container implements IContainer {
         //Testar se os itens se sopreoeem
         for (int i=0;i<iItemPackeds.length-1; i++){
             for (int j=1;j<iItemPackeds.length; j++){
-                if (iItemPackeds[i] != null){
+                if (iItemPackeds[i] != null || iItemPackeds[j] != null){
                     //X axis test
                     if (iItemPackeds[i].getPosition().getX() + iItemPackeds[i].getItem().getLenght() > iItemPackeds[j].getPosition().getX() ||
                             iItemPackeds[i].getPosition().getX() > iItemPackeds[j].getPosition().getX() + iItemPackeds[j].getItem().getLenght()){
@@ -144,6 +143,7 @@ public class Container implements IContainer {
 
     @Override
     public void close() throws ContException, PosException {
+        validate();
         isClosed= true;
     }
 
