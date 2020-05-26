@@ -7,11 +7,12 @@ import order.base.IAddress;
  * Classe de definicao do Endereco
  */
 public class Address implements IAddress {
-    String city;
     String country;
     int number;
-    String state;
     String street;
+    String city;
+    String state;
+
 
     /**
      * Constructor do Endereco
@@ -22,7 +23,7 @@ public class Address implements IAddress {
      * @param state
      * @param street
      */
-    public Address(String city, String country, int number, String state, String street) {
+    public Address(String country,int number,String street,  String city,  String state) {
         this.city = city;
         this.country = country;
         this.number = number;

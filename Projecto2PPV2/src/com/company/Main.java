@@ -1,19 +1,24 @@
 package com.company;
 
 
-import com.company.Exceptions.ContException;
 import com.company.Packing.Container;
 import com.company.Packing.Item;
 import com.company.Packing.PackedItem;
 import com.company.Packing.Position;
+import com.company.ShippingOrder.Exporter;
 import com.company.ShippingOrder.ShippingOrder;
+import com.company.base.Address;
+import com.company.base.Customer;
+import com.company.base.Destination;
 import order.base.OrderStatus;
 import order.exceptions.ContainerException;
 import order.exceptions.OrderException;
 import order.exceptions.PositionException;
 import order.packing.Color;
+import order.packing.IContainer;
 import order.packing.IItem;
 import order.packing.IItemPacked;
+import packing_gui.PackingGUI;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -21,7 +26,7 @@ import java.util.Arrays;
 
 public class Main {
 
-    public static void main(String[] args) throws PositionException, ContainerException, IOException, ParseException, OrderException {
+    public static void main(String[] args) throws PositionException, ContainerException, IOException, ParseException, OrderException, org.json.simple.parser.ParseException {
 
        // PackingGUI.render("C:\\Users\\marce\\Desktop\\Projecto2PPV2\\src\\com\\company\\example.json");
 
@@ -49,12 +54,12 @@ public class Main {
         PackedItem packedItem = new PackedItem(Color.aqua,item,position);
         System.out.println("PackedItem: "+packedItem.toString());
 
-        System.out.println(packedItem.getPosition().toString());
+        //System.out.println(packedItem.getPosition().toString());
         //----------Test PackedItem----------//
 
         //----------Test PackedItem----------//
             //Add Item
-            Container container = new Container(500,"ContainerNNR1",50,50,50);
+            Container container = new Container(500,"ContainerNNR1",50,Color.fuchsia,50,Color.maroon,50);
             //container.addItem(item,position,Color.black);
             //container.addItem(item2,position,Color.black);
             //container.addItem(item3,position,Color.black);
@@ -75,7 +80,7 @@ public class Main {
 
             //GetPackedItems test
             IItemPacked[] iItemPackeds;
-            iItemPackeds = container.iItemPackeds;
+            iItemPackeds = container.items;
             System.out.println("Main final:  "+ Arrays.toString(iItemPackeds));
 
             //get remaining volume
@@ -89,9 +94,16 @@ public class Main {
         //----------Test PackedItem----------//
 
         //----------ShippingOrder Test----------//
-        Container container2 = new Container(500,"ContainerNNR2",50,50,50);
+        Container container2 = new Container(500,"ContainerNNR2",50,Color.fuchsia,50,Color.maroon,50);
+        Position position3 = new Position(8,8,8);
+        Position position4 = new Position(12,12,12);
+        container2.addItem(item4,position,Color.black);
+        container2.addItem(item4,position2,Color.black);
 
-        ShippingOrder shippingOrder = new ShippingOrder();
+        //Criar paramtros para Shipping Order
+        Address address = new Address("Portuga", 55,"55","Felgueiras","Porto");
+        Customer customer = new Customer(111,"Marcelo", address,address);
+        ShippingOrder shippingOrder = new ShippingOrder(11,customer);
         //Add container
         //shippingOrder.addContainer(container);
         //shippingOrder.addContainer(container2);
@@ -106,10 +118,27 @@ public class Main {
         shippingOrder.getStatus();
         shippingOrder.addContainer(container);
         shippingOrder.addContainer(container2);
-        shippingOrder.setStatus(OrderStatus.CLOSED);
-        shippingOrder.getStatus();
-
+        //shippingOrder.addContainer(container);
+        //shippingOrder.addContainer(container2);
+        //shippingOrder.setStatus(OrderStatus.CLOSED);
+        //shippingOrder.getStatus();
+        IContainer[] iContainers = shippingOrder.getContainers();
+        System.out.println(Arrays.toString(iContainers));
+        //Test Summary
+        System.out.println("SUMMARY:  "+shippingOrder.summary());
+        
+        Destination destination = new Destination(address,"Marcelo DEstinatio" );
+        shippingOrder.setDestination(destination);
         //----------ShippingOrder Test----------//
+
+        //----------Export Test----------//
+
+        Exporter exporter = new Exporter();
+        exporter.export(shippingOrder);
+        //Test Render
+        PackingGUI.render("exampleWrite.json");
+        //----------Export Test----------//
+
 
     }
 }

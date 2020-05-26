@@ -5,17 +5,18 @@ import order.packing.IItem;
 public class Item implements IItem {
 
     private String reference;
-    private String description;
     private int depth;
+    private String description;
+
     private int height;
-    private int lenght;
+    private int length;
 
     public Item(String reference, String description, int depth, int height, int length) {
         this.reference = reference;
         this.description = description;
         this.depth = depth;
         this.height = height;
-        this.lenght = length;
+        this.length = length;
     }
 
 
@@ -48,12 +49,12 @@ public class Item implements IItem {
 
     @Override
     public int getLenght() {
-        return this.lenght;
+        return this.length;
     }
 
     @Override
     public int getVolume() {
-        int tmp = this.depth * this.height * this.lenght;
+        int tmp = this.depth * this.height * this.length;
         return tmp;
     }
 
@@ -69,7 +70,7 @@ public class Item implements IItem {
                 ", description='" + description + '\'' +
                 ", depth=" + depth +
                 ", height=" + height +
-                ", lenght=" + lenght +
+                ", lenght=" + length +
                 '}';
     }
 }

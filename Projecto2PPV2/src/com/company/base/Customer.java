@@ -8,9 +8,9 @@ import order.base.ICustomer;
  * Classe de definicao dos dados do Cliente
  */
 public class Customer implements ICustomer {
-    int costumerId;
-    String name;
     IAddress address;
+    String name;
+    int costumerId;
     IAddress billingAddress;
 
     /**
@@ -26,6 +26,11 @@ public class Customer implements ICustomer {
         this.name = name;
         this.address = address;
         this.billingAddress = billingAddress;
+    }
+
+    public Customer( String name, IAddress address) {
+        this.name = name;
+        this.address = address;
     }
 
     /**

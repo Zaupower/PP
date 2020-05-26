@@ -2,8 +2,6 @@ package com.company.ShippingOrder;
 
 import com.company.Exceptions.ContException;
 import com.company.Exceptions.OrdeException;
-import com.company.Packing.PackedItem;
-import com.company.base.Destination;
 import order.base.ICustomer;
 import order.base.IPerson;
 import order.base.OrderStatus;
@@ -11,18 +9,21 @@ import order.exceptions.ContainerException;
 import order.exceptions.OrderException;
 import order.exceptions.PositionException;
 import order.packing.IContainer;
-import order.packing.IItem;
 import shippingorder.IShippingOrder;
 
 import java.util.Arrays;
 
 public class ShippingOrder implements IShippingOrder {
-    IContainer container;
-    IPerson person;
-    ICustomer customer;
+    int orderId;
     IPerson destination;
     IContainer[] containers = new IContainer[2];
     OrderStatus orderStatus = OrderStatus.AWAITS_TREATMENT;
+    ICustomer customer;
+
+    public ShippingOrder(int orderId, ICustomer customer) {
+        this.orderId = orderId;
+        this.customer = customer;
+    }
 
     /**
      * Verifica se Order Status esta IN_TREATMENT\
@@ -169,12 +170,7 @@ public class ShippingOrder implements IShippingOrder {
                     }
                 }
                 if (counter > 0) {
-                    for (int i = 0; i < containers.length; i++) {
-                        if (containers[i] != null) {
-
-                            containers[i].validate();
-                        }
-                    }
+                    validate();
                 } else if (counter == 0){
 
                     throw new  ContException("Container ERROR NO Containers FOUND in Arayy: ");
@@ -193,22 +189,48 @@ public class ShippingOrder implements IShippingOrder {
 
     @Override
     public int getId() {
-        return 0;
+        return this.orderId;
     }
 
     @Override
     public IContainer[] getContainers() {
-        return new IContainer[0];
+
+        int counter=0;
+        for (int i = 0; i < this.containers.length; i++) {
+            if (this.containers[i] != null) {
+                counter++;
+            }
+        }
+        IContainer[] iContainers = new IContainer[counter];
+        System.out.println("iItemPackeds1 lenght:  " + iContainers.length+ " conteur: "+counter);
+        for (int i = 0; i < iContainers.length; i++) {
+            iContainers[i] = containers[i];
+        }
+        System.out.println(Arrays.toString(iContainers));
+        return iContainers;
     }
 
     @Override
     public void validate() throws ContainerException, PositionException {
 
+        for (int i =0; i<containers.length; i++){
+            if (containers[i] != null){
+                containers[i].validate();
+            }
+        }
     }
 
     @Override
     public String summary() {
-        return null;
+
+
+        return "ShippingOrder{" +
+                "id=" + orderId +
+                ", customer=" + customer +
+                ", destination=" + destination +
+                ", containers=" + Arrays.toString(containers) +
+                ", orderStatus=" + orderStatus +
+                '}';
     }
 
     /**
@@ -241,4 +263,5 @@ public class ShippingOrder implements IShippingOrder {
 
         return check;
     }
+
 }
