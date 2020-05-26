@@ -33,9 +33,9 @@ public class Position implements IPosition {
 
     @Override
     public void setX(int i) throws PosException {
-        if (i<0){
+        if (i < 0) {
             throw new PosException("O Valor deve ser SUPERIOR a 0");
-        }else {
+        } else {
             this.x = i;
         }
 
@@ -44,18 +44,18 @@ public class Position implements IPosition {
 
     @Override
     public void setY(int i) throws PosException {
-        if (i<0){
+        if (i < 0) {
             throw new PosException("O Valor deve ser SUPERIOR a 0");
-        }else {
+        } else {
             this.y = i;
         }
     }
 
     @Override
     public void setZ(int i) throws PosException {
-        if (i<0){
+        if (i < 0) {
             throw new PosException("O Valor deve ser SUPERIOR a 0");
-        }else {
+        } else {
             this.z = i;
         }
     }

@@ -3,78 +3,150 @@ package com.company.base;
 
 import order.base.IAddress;
 
+/**
+ * Classe de definicao do Endereco
+ */
 public class Address implements IAddress {
     String city;
     String country;
     int number;
-    String State;
+    String state;
     String street;
 
+    /**
+     * Constructor do Endereco
+     *
+     * @param city
+     * @param country
+     * @param number
+     * @param state
+     * @param street
+     */
     public Address(String city, String country, int number, String state, String street) {
         this.city = city;
         this.country = country;
         this.number = number;
-        State = state;
+        state = state;
         this.street = street;
     }
 
+    /**
+     * Retorna a cidade definida
+     *
+     * @return
+     */
     @Override
     public String getCity() {
-        return null;
+        return this.city;
     }
 
+    /**
+     * Retona o pais adicionado
+     *
+     * @return
+     */
     @Override
     public String getCountry() {
-        return null;
+        return this.country;
     }
 
+    /**
+     * Retorna o numero adicionado
+     *
+     * @return
+     */
     @Override
     public int getNumber() {
-        return 0;
+        return this.number;
     }
 
+    /**
+     * Retorna a Regiao adicionada
+     *
+     * @return
+     */
     @Override
     public String getState() {
-        return null;
+        return this.state;
     }
 
+    /**
+     * Retorna o endereco fisico adicionado
+     *
+     * @return
+     */
     @Override
     public String getStreet() {
-        return null;
+        return this.city;
     }
 
+    /**
+     * Adiciona uma cidade
+     *
+     * @param s
+     */
     @Override
     public void setCity(String s) {
 
+        this.city = s;
     }
 
+    /**
+     * Adiciona o pais
+     *
+     * @param s
+     */
     @Override
     public void setCountry(String s) {
 
+        this.country = s;
     }
 
+    /**
+     * Adiciona o numero
+     *
+     * @param i
+     */
     @Override
     public void setNumber(int i) {
 
+        this.number = i;
     }
 
+    /**
+     * Adiciona a regiao
+     *
+     * @param s
+     */
     @Override
     public void setState(String s) {
 
+        this.state = s;
     }
 
+    /**
+     * Adiciona a Ruas
+     *
+     * @param s
+     */
     @Override
     public void setStreet(String s) {
 
+        this.street = s;
     }
 
+    /**
+     * Metodo toString
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Address{" +
                 "city='" + city + '\'' +
                 ", country='" + country + '\'' +
                 ", number=" + number +
-                ", State='" + State + '\'' +
+                ", State='" + state + '\'' +
                 ", street='" + street + '\'' +
                 '}';
     }

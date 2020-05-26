@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public class Exporter implements IExporter {
     String filePath = "exampleWrite.json";
+
     @Override
     public void export(IShippingOrder iShippingOrder) throws IOException {
 
@@ -18,7 +19,7 @@ public class Exporter implements IExporter {
             gson.toJson(iShippingOrder, fileWriter);
             fileWriter.close();
             System.out.println("JSON string write to a file successfully");
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e.toString());
         }
 
