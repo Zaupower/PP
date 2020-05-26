@@ -7,6 +7,10 @@ import shippingorder.IShippingOrder;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Classe que gera um ficheiro json da classe iShippingOrder
+ * com toda a informacao necessaria a exportar
+ */
 public class Exporter implements IExporter {
     String filePath = "exampleWrite.json";
 

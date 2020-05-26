@@ -6,6 +6,10 @@ import com.company.Packing.Container;
 import com.company.Packing.Item;
 import com.company.Packing.PackedItem;
 import com.company.Packing.Position;
+import com.company.ShippingOrder.ShippingOrder;
+import order.base.OrderStatus;
+import order.exceptions.ContainerException;
+import order.exceptions.OrderException;
 import order.exceptions.PositionException;
 import order.packing.Color;
 import order.packing.IItem;
@@ -17,7 +21,7 @@ import java.util.Arrays;
 
 public class Main {
 
-    public static void main(String[] args) throws PositionException, ContException, IOException, ParseException {
+    public static void main(String[] args) throws PositionException, ContainerException, IOException, ParseException, OrderException {
 
        // PackingGUI.render("C:\\Users\\marce\\Desktop\\Projecto2PPV2\\src\\com\\company\\example.json");
 
@@ -83,6 +87,29 @@ public class Main {
             System.out.println(container.getNumberOfItems());
 
         //----------Test PackedItem----------//
+
+        //----------ShippingOrder Test----------//
+        Container container2 = new Container(500,"ContainerNNR2",50,50,50);
+
+        ShippingOrder shippingOrder = new ShippingOrder();
+        //Add container
+        //shippingOrder.addContainer(container);
+        //shippingOrder.addContainer(container2);
+
+        //Test removeContainer
+        //shippingOrder.removeContainer(container2);
+        //System.out.println("Removido Container2");
+        //ExistsContainer
+        //boolean b = shippingOrder.existsContainer(container2);
+        //System.out.println(b);
+        shippingOrder.setStatus(OrderStatus.IN_TREATMENT);
+        shippingOrder.getStatus();
+        shippingOrder.addContainer(container);
+        shippingOrder.addContainer(container2);
+        shippingOrder.setStatus(OrderStatus.CLOSED);
+        shippingOrder.getStatus();
+
+        //----------ShippingOrder Test----------//
 
     }
 }

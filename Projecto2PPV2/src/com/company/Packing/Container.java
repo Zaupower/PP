@@ -216,7 +216,7 @@ public class Container implements IContainer {
         }
         System.out.println("TMP" + tmp);
 
-        IItemPacked[] iItemPackeds1 = new IItemPacked[tmp - 1];
+        IItemPacked[] iItemPackeds1 = new IItemPacked[tmp];
         System.out.println("iItemPackeds1 lenght" + iItemPackeds1.length);
         for (int i = 0; i < iItemPackeds1.length; i++) {
             iItemPackeds1[i] = iItemPackeds[i];
