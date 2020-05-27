@@ -28,9 +28,6 @@ public class Main {
 
     public static void main(String[] args) throws PositionException, ContainerException, IOException, ParseException, OrderException, org.json.simple.parser.ParseException {
 
-       // PackingGUI.render("C:\\Users\\marce\\Desktop\\Projecto2PPV2\\src\\com\\company\\example.json");
-
-	// write your code here
         //----------Test Item----------//
 
         IItem item = new Item("ItemRef1","Este e o primeiro item",4,4,4);
@@ -45,7 +42,7 @@ public class Main {
 
         //----------Test Position Throws----------//
         Position position = new Position(0,0,0);
-        Position position2 = new Position(4,4,4);
+        Position position2 = new Position(0,4,0);
         System.out.println(position.getX());
         //----------Test Position Throws----------//
 
@@ -63,7 +60,7 @@ public class Main {
             //container.addItem(item,position,Color.black);
             //container.addItem(item2,position,Color.black);
             //container.addItem(item3,position,Color.black);
-            container.addItem(item4,position,Color.black);
+            container.addItem(item3,position,Color.black);
             container.addItem(item4,position2,Color.black);
 
             //Test Remove
@@ -116,8 +113,17 @@ public class Main {
         //System.out.println(b);
         shippingOrder.setStatus(OrderStatus.IN_TREATMENT);
         shippingOrder.getStatus();
+
+        /*
+        dEVIA CRIAR UM NOVO ARRAY SEM AS POSICOES NULL
+        IItemPacked[] PackedTins = container.getPackedItems();
+        System.out.println("PACKED iTEMS neW ARRAY"+PackedTins.length);
+
+         */
         shippingOrder.addContainer(container);
         shippingOrder.addContainer(container2);
+        IContainer[] conts = shippingOrder.getContainers();
+        System.out.println("Conts Length "+conts.length);
         //shippingOrder.addContainer(container);
         //shippingOrder.addContainer(container2);
         //shippingOrder.setStatus(OrderStatus.CLOSED);
@@ -126,7 +132,7 @@ public class Main {
         System.out.println(Arrays.toString(iContainers));
         //Test Summary
         System.out.println("SUMMARY:  "+shippingOrder.summary());
-        
+
         Destination destination = new Destination(address,"Marcelo DEstinatio" );
         shippingOrder.setDestination(destination);
         //----------ShippingOrder Test----------//

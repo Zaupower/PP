@@ -130,30 +130,41 @@ public class Container implements IContainer {
         }
 
         //Testar se os itens se sopreoeem
+        int overlapCounter =0;
         for (int i = 0; i < items.length - 1; i++) {
             for (int j = 1; j < items.length; j++) {
                 if (items[i] != null && items[j] != null) {
                     //X axis test
-                    if (items[i].getPosition().getX() + items[i].getItem().getLenght() > items[j].getPosition().getX() ||
-                            items[i].getPosition().getX() > items[j].getPosition().getX() + items[j].getItem().getLenght()) {
-                        System.out.println(items[i].getPosition().getX());
-                        System.out.println(items[j].getPosition().getX() + items[j].getItem().getLenght());
-                        throw new PosException("Item: " + items[i].getItem().getReference() + "Items :" + i + " e " + j + " sobreoem se em xx");
-                    }
-                    //Y axis test
-                    if (items[i].getPosition().getY() + items[i].getItem().getDepth() > items[j].getPosition().getY() ||
-                            items[i].getPosition().getY() > items[j].getPosition().getY() + items[j].getItem().getDepth()) {
-                        throw new PosException("Item: " + items[i].getItem().getReference() + "Items :" + i + " e " + j + " sobreoem se em yy");
-                    }
-                    //Z axis test
-                    if (items[i].getPosition().getZ() + items[i].getItem().getHeight() > items[j].getPosition().getZ() ||
-                            items[i].getPosition().getZ() > items[j].getPosition().getZ() + items[j].getItem().getHeight()) {
-                        throw new PosException("Item: " + items[i].getItem().getReference() + "Items :" + i + " e " + j + " sobreoem se em zz");
-                    }
+                    int iMaxX =(items[i].getPosition().getX() + items[i].getItem().getLenght());
+                    int iMinX =items[i].getPosition().getX();
+                    int jMaxX = (items[j].getPosition().getX()  + items[j].getItem().getLenght());
+                    int jMinX =items[j].getPosition().getX();
+                    //YY variables
+                    int iMaxY =items[i].getPosition().getY() + items[i].getItem().getDepth();
+                    int iMinY =items[i].getPosition().getY();
+                    int jMaxY = items[j].getPosition().getY() + items[j].getItem().getDepth();
+                    int jMinY = items[j].getPosition().getY();
+                    //ZZ variables
+                    int iMaxZ = items[i].getPosition().getZ() + items[i].getItem().getHeight();
+                    int iMinZ = items[i].getPosition().getZ();
+                    int jMaxZ =  items[j].getPosition().getZ() + items[j].getItem().getHeight();
+                    int jMinZ = items[j].getPosition().getZ();
 
+                    if (    iMaxX > jMinX  && jMaxX  > iMinX &&
+                            iMaxY > jMinY && jMaxY > iMinY &&
+                            iMaxZ > jMinZ && jMaxZ > iMinZ  ) {
+
+                        throw new PosException("Item: " + items[i].getItem().getReference() + " E Item "+ items[j].getItem().getReference()+"Items :" + i + " e " + j + " sobreoem se ");
+                    }else {
+                        System.out.println("Parabens nao existe OverLap");
+
+                    }
                 }
             }
         }
+        System.out.println("OVERLAPCOUNTER:  "+overlapCounter);
+
+
     }
 
     /**

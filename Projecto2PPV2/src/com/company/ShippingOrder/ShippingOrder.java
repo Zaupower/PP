@@ -166,21 +166,21 @@ public class ShippingOrder implements IShippingOrder {
                     if (this.containers[i] != null) {
 
                         counter++;
-                        System.out.println("Counter de Array de Containers"+ counter);
+                        System.out.println("Counter de Array de Containers" + counter);
                     }
                 }
                 if (counter > 0) {
                     validate();
-                } else if (counter == 0){
+                } else if (counter == 0) {
 
-                    throw new  ContException("Container ERROR NO Containers FOUND in Arayy: ");
+                    throw new ContException("Container ERROR NO Containers FOUND in Arayy: ");
                 }
                 this.orderStatus = OrderStatus.CLOSED;
-            }else if(orderStatus == OrderStatus.SHIPPED && this.orderStatus == OrderStatus.CLOSED) {
+            } else if (orderStatus == OrderStatus.SHIPPED && this.orderStatus == OrderStatus.CLOSED) {
                 this.orderStatus = OrderStatus.SHIPPED;
 
-            }else {
-                throw new  OrdeException("Order Status ERROR, current OrderStatus: "+this.orderStatus);
+            } else {
+                throw new OrdeException("Order Status ERROR, current OrderStatus: " + this.orderStatus);
             }
 
         }
@@ -195,14 +195,14 @@ public class ShippingOrder implements IShippingOrder {
     @Override
     public IContainer[] getContainers() {
 
-        int counter=0;
+        int counter = 0;
         for (int i = 0; i < this.containers.length; i++) {
             if (this.containers[i] != null) {
                 counter++;
             }
         }
         IContainer[] iContainers = new IContainer[counter];
-        System.out.println("iItemPackeds1 lenght:  " + iContainers.length+ " conteur: "+counter);
+        System.out.println("iItemPackeds1 lenght:  " + iContainers.length + " conteur: " + counter);
         for (int i = 0; i < iContainers.length; i++) {
             iContainers[i] = containers[i];
         }
@@ -213,8 +213,8 @@ public class ShippingOrder implements IShippingOrder {
     @Override
     public void validate() throws ContainerException, PositionException {
 
-        for (int i =0; i<containers.length; i++){
-            if (containers[i] != null){
+        for (int i = 0; i < containers.length; i++) {
+            if (containers[i] != null) {
                 containers[i].validate();
             }
         }
@@ -222,8 +222,6 @@ public class ShippingOrder implements IShippingOrder {
 
     @Override
     public String summary() {
-
-
         return "ShippingOrder{" +
                 "id=" + orderId +
                 ", customer=" + customer +
