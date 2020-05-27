@@ -13,13 +13,21 @@ import shippingorder.IShippingOrder;
 
 import java.util.Arrays;
 
+/**
+ * Classe que gere os containers
+ */
 public class ShippingOrder implements IShippingOrder {
-    int orderId;
-    IPerson destination;
-    IContainer[] containers = new IContainer[2];
-    OrderStatus orderStatus = OrderStatus.AWAITS_TREATMENT;
-    ICustomer customer;
+    private int orderId;
+    private IPerson destination;
+    private IContainer[] containers = new IContainer[10];
+    private OrderStatus orderStatus = OrderStatus.AWAITS_TREATMENT;
+    private ICustomer customer;
 
+    /**
+     * Construtor de Classe
+     * @param orderId
+     * @param customer
+     */
     public ShippingOrder(int orderId, ICustomer customer) {
         this.orderId = orderId;
         this.customer = customer;
@@ -43,13 +51,13 @@ public class ShippingOrder implements IShippingOrder {
             throw new OrdeException("Order Status invalido");
         } else {
             //CheckNull
-            if (checkNull(iContainer) || findOne >= 0) {
+            if (checkNull(iContainer) || findOne >= 0 || !iContainer.isClosed()) {
 
-                if (findOne >= 0) {
+                if (findOne > 0) {
                     System.out.println("Container ja existente na posicao: " + findOne);
                 }
 
-                throw new ContException();
+                throw new ContException(" Contentor: "+iContainer.getReference()+" ja existe ou Nao esta devidamente Fechado");
             } else {
                 for (int i = 0; i < containers.length; i++) {
                     if (containers[i] == null) {
@@ -64,10 +72,16 @@ public class ShippingOrder implements IShippingOrder {
                 }
             }
         }
-        System.out.println(Arrays.toString(containers));
         return test;
     }
 
+    /**
+     * Remove um container do array e move a posicao nula para a ultima posicao do array
+     * @param iContainer
+     * @return Boleano
+     * @throws OrderException
+     * @throws ContainerException
+     */
     @Override
     public boolean removeContainer(IContainer iContainer) throws OrderException, ContainerException {
         int rmIndex = 0;
@@ -79,7 +93,6 @@ public class ShippingOrder implements IShippingOrder {
                 for (int i = 0; i < containers.length; i++) {
                     if (containers[i] != null && containers[i].getReference().equals(iContainer.getReference())) {
                         rmIndex = i;
-                        System.out.println("rmIndex: " + rmIndex + " Reference: " + containers[i].getReference());
                         test = true;
                     }
                 }
@@ -92,8 +105,6 @@ public class ShippingOrder implements IShippingOrder {
                 }
                 containers[j] = null;
 
-                System.out.println(Arrays.toString(containers));
-
             } else {
                 throw new ContException("Item nao encontrado");
             }
@@ -101,59 +112,88 @@ public class ShippingOrder implements IShippingOrder {
         return test;
     }
 
+    /**
+     * Verifica se um Container exite
+     * Verificando a sua referencia
+     * @param iContainer
+     * @return Boleano
+     */
     @Override
     public boolean existsContainer(IContainer iContainer) {
         boolean test = false;
         if (iContainer instanceof IContainer) {
             for (int i = 0; i < containers.length; i++) {
                 if (containers[i] != null && containers[i].getReference().equals(iContainer.getReference())) {
-
-                    System.out.println(" Reference found : " + containers[i].getReference());
                     test = true;
                 }
             }
         }
-        if (true == false) {
-            System.out.println(" No Reference found : ");
-        }
         return test;
     }
 
+    /**
+     * Encontra 1 Container e retorna a sua posicao no array de Containers
+     * @param s
+     * @return
+     */
     @Override
     public int findContainer(String s) {
         int test = (-1);
         for (int i = 0; i < containers.length; i++) {
             if (containers[i] != null && containers[i].getReference().equals(s)) {
-
-                System.out.println(" Reference found : " + containers[i].getReference());
                 test = i;
             }
         }
         return test;
     }
 
+    /**
+     * Retona informacao sobre o destino do pedido
+     * @return
+     */
     @Override
     public IPerson getDestination() {
         return this.destination;
     }
 
+    /**
+     * Define o destino da encomenda
+     * @param iPerson
+     */
     @Override
     public void setDestination(IPerson iPerson) {
         this.destination = iPerson;
 
     }
 
+    /**
+     * Retorna o Cliente do pedido
+     * @return
+     */
     @Override
     public ICustomer getCustomer() {
         return this.customer;
     }
 
+    /**
+     *
+     * @return Order Status
+     */
     @Override
     public OrderStatus getStatus() {
-        System.out.println(this.orderStatus.name());
+
         return this.orderStatus;
     }
 
+    /**
+     * DEfine o Status Actual Do pedido Consuante o seu estado atual e pedido
+     * Caso o estado atual seja aguarda tratamento apenas pode ser mudado para  em Tratameno
+     * Caso seja em tratamento apenas pode mudar para Fechado
+     * @param orderStatus
+     * @throws OrderException
+     * @throws ContainerException
+     * @throws PositionException
+     */
     @Override
     public void setStatus(OrderStatus orderStatus) throws OrderException, ContainerException, PositionException {
 
@@ -166,7 +206,6 @@ public class ShippingOrder implements IShippingOrder {
                     if (this.containers[i] != null) {
 
                         counter++;
-                        System.out.println("Counter de Array de Containers" + counter);
                     }
                 }
                 if (counter > 0) {
@@ -186,12 +225,19 @@ public class ShippingOrder implements IShippingOrder {
         }
     }
 
-
+    /**
+     * Retorna Shipping Order ID
+     * @return
+     */
     @Override
     public int getId() {
         return this.orderId;
     }
 
+    /**
+     * Gera um novo array de Containers Sem posicoes null
+     * @return Container Array
+     */
     @Override
     public IContainer[] getContainers() {
 
@@ -202,14 +248,18 @@ public class ShippingOrder implements IShippingOrder {
             }
         }
         IContainer[] iContainers = new IContainer[counter];
-        System.out.println("iItemPackeds1 lenght:  " + iContainers.length + " conteur: " + counter);
         for (int i = 0; i < iContainers.length; i++) {
             iContainers[i] = containers[i];
         }
-        System.out.println(Arrays.toString(iContainers));
         return iContainers;
     }
 
+    /**
+     * Valida todas as Posicoes e diminui o tamanho do array inical de containers
+     * para que nao tenha posicoes null
+     * @throws ContainerException
+     * @throws PositionException
+     */
     @Override
     public void validate() throws ContainerException, PositionException {
 
@@ -218,8 +268,13 @@ public class ShippingOrder implements IShippingOrder {
                 containers[i].validate();
             }
         }
+        this.containers = getContainers();
     }
 
+    /**
+     * Pequeno sumario do interior da ShippingOrder
+     * @return String
+     */
     @Override
     public String summary() {
         return "ShippingOrder{" +
@@ -242,23 +297,19 @@ public class ShippingOrder implements IShippingOrder {
         for (int i = 0; i < container.getPackedItems().length; i++) {
             if (container.getPackedItems()[i] == null) {
                 check = true;
-                System.out.println("Item " + i + " Contem posicoes null");
+
                 break;
             }
             if (container.getPackedItems()[i].getItem() == null) {
                 check = true;
-                System.out.println("Item " + i + " getItem Contem posicoes null");
                 break;
             }
             if (container.getPackedItems()[i].getPosition() == null) {
                 check = true;
-                System.out.println("Item " + i + " getPosition Contem posicoes null");
                 break;
             }
 
         }
-
-
         return check;
     }
 

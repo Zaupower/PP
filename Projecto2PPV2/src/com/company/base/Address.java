@@ -7,12 +7,15 @@ import order.base.IAddress;
  * Classe de definicao do Endereco
  */
 public class Address implements IAddress {
-    String country;
-    int number;
-    String street;
-    String city;
-    String state;
+    private String country;
+    private int number;
+    private String street;
+    private String city;
+    private String state;
 
+
+    public Address() {
+    }
 
     /**
      * Constructor do Endereco

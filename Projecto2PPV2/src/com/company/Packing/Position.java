@@ -10,6 +10,9 @@ public class Position implements IPosition {
     private int y;
     private int z;
 
+    public Position() {
+    }
+
     public Position(int x, int y, int z) {
         this.x = x;
         this.y = y;

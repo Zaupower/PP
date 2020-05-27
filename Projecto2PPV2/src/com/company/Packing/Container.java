@@ -8,16 +8,15 @@ import java.util.Arrays;
 
 public class Container implements IContainer {
 
-    int volume;
-    String reference;
-    int depth;
-    Color color;
-    int length;
-    Color colorEdge;
-    public IItemPacked[] items = new IItemPacked[2];
-    int height;
-    int occupiedVolume;
-
+    private int volume;
+    private String reference;
+    private int depth;
+    private Color color;
+    private int length;
+    private Color colorEdge;
+    private IItemPacked[] items = new IItemPacked[10];
+    private int height;
+    private int occupiedVolume;
     transient boolean isClosed = false;
 
     /**
@@ -53,7 +52,7 @@ public class Container implements IContainer {
     public boolean addItem(IItem iItem, IPosition iPosition, Color color) throws ContException {
         boolean test = false;
         for (int i = 0; i < items.length; i++) {
-            if (items[i] == null) {
+            if (items[i] == null && isClosed == false) {
                 items[i] = new PackedItem(color, iItem, iPosition);
                 break;
             } else if (items[items.length - 1] != null || isClosed == true) {
@@ -62,9 +61,8 @@ public class Container implements IContainer {
         }
         if (test) {
             isClosed();
-            throw new ContException("Container sem posicoes disponiveis");
+            throw new ContException("Container sem posicoes disponiveis ou Fechado");
         }
-        System.out.println(Arrays.toString(items));
         return test;
     }
 
@@ -83,7 +81,6 @@ public class Container implements IContainer {
             for (int i = 0; i < items.length; i++) {
                 if (items[i] != null && items[i].getItem().getReference().equals(iItem.getReference())) {
                     rmIndex = i;
-                    System.out.println("rmIndex: " + rmIndex + " Reference: " + items[i].getItem().getReference());
                     test = true;
                 }
             }
@@ -95,8 +92,6 @@ public class Container implements IContainer {
                 items[j] = items[j + 1];
             }
             items[j] = null;
-
-            System.out.println(Arrays.toString(items));
 
         } else {
             throw new ContException("Item nao encontrado");
@@ -114,57 +109,65 @@ public class Container implements IContainer {
     @Override
     public void validate() throws ContException, PosException {
 
+        boolean validated = false;
+        this.items = getPackedItems();
+
         if (this.volume < getOccupiedVolume()) {
 
             throw new ContException("Volume superior ao maximo permitido");
-        }
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] != null) {
-                //Testa se os Items dentro dos Packed Items se encontram dentro do container
-                if (items[i].getItem().getDepth() > this.depth ||
-                        items[i].getItem().getHeight() > this.height ||
-                        items[i].getItem().getLenght() > this.length) {
-                    throw new PosException("Item: " + items[i].getItem().getReference() + "Encontra-se fora do container");
+        }else if (this.items.length < 1){
+            throw new  ContException("Nao Existem Items no Contentor");
+        }else {
+            for (int i = 0; i < items.length; i++) {
+                if (items[i] != null) {
+                    //Testa se os Items dentro dos Packed Items se encontram dentro do container
+                    if (items[i].getItem().getDepth() > this.depth ||
+                            items[i].getItem().getHeight() > this.height ||
+                            items[i].getItem().getLenght() > this.length) {
+                        throw new PosException("Item: " + items[i].getItem().getReference() + "Encontra-se fora do container");
+                    }
                 }
             }
-        }
 
-        //Testar se os itens se sopreoeem
-        int overlapCounter =0;
-        for (int i = 0; i < items.length - 1; i++) {
-            for (int j = 1; j < items.length; j++) {
-                if (items[i] != null && items[j] != null) {
-                    //X axis test
-                    int iMaxX =(items[i].getPosition().getX() + items[i].getItem().getLenght());
-                    int iMinX =items[i].getPosition().getX();
-                    int jMaxX = (items[j].getPosition().getX()  + items[j].getItem().getLenght());
-                    int jMinX =items[j].getPosition().getX();
-                    //YY variables
-                    int iMaxY =items[i].getPosition().getY() + items[i].getItem().getDepth();
-                    int iMinY =items[i].getPosition().getY();
-                    int jMaxY = items[j].getPosition().getY() + items[j].getItem().getDepth();
-                    int jMinY = items[j].getPosition().getY();
-                    //ZZ variables
-                    int iMaxZ = items[i].getPosition().getZ() + items[i].getItem().getHeight();
-                    int iMinZ = items[i].getPosition().getZ();
-                    int jMaxZ =  items[j].getPosition().getZ() + items[j].getItem().getHeight();
-                    int jMinZ = items[j].getPosition().getZ();
+            if (this.items.length == 1){
+                System.out.println("Valido");
+            }else {
+                //Testar se os itens se sopreoeem
+                for (int i = 0; i < items.length - 1; i++) {
+                    for (int j = 1; j < items.length; j++) {
+                        if ( i !=j) {
+                            //X axis test
+                            int iMaxX = (items[i].getPosition().getX() + items[i].getItem().getLenght());
+                            int iMinX = items[i].getPosition().getX();
+                            int jMaxX = (items[j].getPosition().getX() + items[j].getItem().getLenght());
+                            int jMinX = items[j].getPosition().getX();
+                            //YY variables
+                            int iMaxY = items[i].getPosition().getY() + items[i].getItem().getDepth();
+                            int iMinY = items[i].getPosition().getY();
+                            int jMaxY = items[j].getPosition().getY() + items[j].getItem().getDepth();
+                            int jMinY = items[j].getPosition().getY();
+                            //ZZ variables
+                            int iMaxZ = items[i].getPosition().getZ() + items[i].getItem().getHeight();
+                            int iMinZ = items[i].getPosition().getZ();
+                            int jMaxZ = items[j].getPosition().getZ() + items[j].getItem().getHeight();
+                            int jMinZ = items[j].getPosition().getZ();
 
-                    if (    iMaxX > jMinX  && jMaxX  > iMinX &&
-                            iMaxY > jMinY && jMaxY > iMinY &&
-                            iMaxZ > jMinZ && jMaxZ > iMinZ  ) {
+                            if (iMaxX > jMinX && jMaxX > iMinX &&
+                                    iMaxY > jMinY && jMaxY > iMinY &&
+                                    iMaxZ > jMinZ && jMaxZ > iMinZ) {
 
-                        throw new PosException("Item: " + items[i].getItem().getReference() + " E Item "+ items[j].getItem().getReference()+"Items :" + i + " e " + j + " sobreoem se ");
-                    }else {
-                        System.out.println("Parabens nao existe OverLap");
-
+                                throw new PosException("Item: " + items[i].getItem().getReference() + " E Item " + items[j].getItem().getReference() + "Items :" + i + " e " + j + " sobreoem se ");
+                            } else {
+                                validated =true;
+                            }
+                        }
                     }
                 }
             }
         }
-        System.out.println("OVERLAPCOUNTER:  "+overlapCounter);
-
-
+        if (validated){
+            System.out.println("Parabens nao existe OverLap");
+        }
     }
 
     /**
@@ -184,7 +187,7 @@ public class Container implements IContainer {
      * Retorna um item pesquisado pela sua referencia
      *
      * @param s
-     * @return
+     * @return IItem
      */
     @Override
     public IItem getItem(String s) {
@@ -200,7 +203,7 @@ public class Container implements IContainer {
     /**
      * Retorna o sumatorio do volume de todos os items presentes no array de Packed Items
      *
-     * @return
+     * @return occupiedVolume
      */
     @Override
     public int getOccupiedVolume() {
@@ -218,7 +221,7 @@ public class Container implements IContainer {
      * Retorna um array novo baseado no array inical de Items mas apenas com as
      * posicoes iguais aonumro de items
      *
-     * @return
+     * @return Array de IItemPacked
      */
     @Override
     public IItemPacked[] getPackedItems() {
@@ -227,25 +230,20 @@ public class Container implements IContainer {
 
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null) {
-                //System.out.println("TMP" + tmp);
                 tmp++;
             }
         }
-        System.out.println("TMP" + tmp);
-
         IItemPacked[] iItemPackeds1 = new IItemPacked[tmp];
-        System.out.println("iItemPackeds1 lenght" + iItemPackeds1.length);
         for (int i = 0; i < iItemPackeds1.length; i++) {
             iItemPackeds1[i] = items[i];
         }
-        System.out.println(Arrays.toString(iItemPackeds1));
         return iItemPackeds1;
     }
 
     /**
      * Retorna a referencia do Container
      *
-     * @return
+     * @return Reference
      */
     @Override
     public String getReference() {
@@ -256,14 +254,13 @@ public class Container implements IContainer {
     /**
      * Contador do numero de items adicionados
      *
-     * @return
+     * @return int
      */
     @Override
     public int getNumberOfItems() {
         int tmp = 0;
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null) {
-                System.out.println("TMP" + tmp);
                 tmp++;
             }
         }
@@ -273,7 +270,7 @@ public class Container implements IContainer {
     /**
      * Calcula o volume libre restante no container
      *
-     * @return
+     * @return getOccupiedVolume
      */
     @Override
     public int getRemainingVolume() {
@@ -283,7 +280,7 @@ public class Container implements IContainer {
     /**
      * Retorna um boleano que e alterado na funcao validate()
      *
-     * @return
+     * @return boolean isClosed
      */
     @Override
     public boolean isClosed() {
@@ -293,7 +290,7 @@ public class Container implements IContainer {
     /**
      * profundidade do Container
      *
-     * @return
+     * @return depth
      */
     @Override
     public int getDepth() {
@@ -303,7 +300,7 @@ public class Container implements IContainer {
     /**
      * Altura do Container
      *
-     * @return
+     * @return height
      */
     @Override
     public int getHeight() {
@@ -313,7 +310,7 @@ public class Container implements IContainer {
     /**
      * Cumprimento do Container
      *
-     * @return
+     * @return length
      */
     @Override
     public int getLenght() {
@@ -323,7 +320,7 @@ public class Container implements IContainer {
     /**
      * Volume Ttal do Container
      *
-     * @return
+     * @return volume
      */
     @Override
     public int getVolume() {
@@ -333,7 +330,7 @@ public class Container implements IContainer {
     /**
      * Metodo toString
      *
-     * @return
+     * @return String
      */
     @Override
     public String toString() {

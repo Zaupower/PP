@@ -8,10 +8,14 @@ import order.base.ICustomer;
  * Classe de definicao dos dados do Cliente
  */
 public class Customer implements ICustomer {
-    IAddress address;
-    String name;
-    int costumerId;
-    IAddress billingAddress;
+    private IAddress address;
+    private String name;
+    private int costumerId;
+    private IAddress billingAddress;
+
+    public Customer(int costumerId) {
+        this.costumerId = costumerId;
+    }
 
     /**
      * Constructor do Cliente

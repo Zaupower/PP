@@ -3,10 +3,18 @@ package com.company.base;
 import order.base.IAddress;
 import order.base.ICustomer;
 
+/**
+ * Classe que define os parametros do destinatario
+ */
 public class Destination implements ICustomer {
-    IAddress address;
-    String name;
+    private IAddress address;
+    private String name;
 
+    /**
+     * Construtor de Destination
+     * @param address
+     * @param name
+     */
     public Destination(IAddress address, String name) {
         this.address = address;
         this.name = name;
@@ -27,23 +35,37 @@ public class Destination implements ICustomer {
 
     }
 
+    /**
+     *
+     * @return Address
+     */
     @Override
     public IAddress getAddress() {
-        return null;
+        return this.address;
     }
 
+    /**
+     *
+     * @return Destination Name
+     */
     @Override
     public String getName() {
-        return null;
+        return this.name;
     }
 
+    /**
+     *
+     * @param iAddress
+     */
     @Override
     public void setAddress(IAddress iAddress) {
 
+        this.address = iAddress;
     }
 
     @Override
     public void setName(String s) {
 
+        this.name = s;
     }
 }

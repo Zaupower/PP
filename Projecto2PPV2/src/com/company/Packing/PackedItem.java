@@ -6,18 +6,21 @@ import order.packing.IItemPacked;
 import order.packing.IPosition;
 
 public class PackedItem implements IItemPacked {
-    String reference;
-    int depth;
-    Color color;
-    int x;
-    int length;
-    int y;
-    String description;
-    int z;
-    Color colorEdge;
-    int height;
-    transient IItem iItem;
-    transient IPosition position;
+    private String reference;
+    private int depth;
+    private Color color;
+    private int x;
+    private int length;
+    private int y;
+    private String description;
+    private int z;
+    private Color colorEdge;
+    private int height;
+    private transient IItem iItem;
+    private transient IPosition position;
+
+    public PackedItem() {
+    }
 
     public PackedItem(Color color, IItem iItem, IPosition position) {
         this.reference = iItem.getReference();
@@ -60,6 +63,9 @@ public class PackedItem implements IItemPacked {
     public void setPosition(IPosition iPosition) {
 
         this.position = iPosition;
+        this.x = position.getX();
+        this.y = position.getY();
+        this.z = position.getZ();
     }
 
     @Override

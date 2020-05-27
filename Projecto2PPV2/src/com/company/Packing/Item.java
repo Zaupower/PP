@@ -7,7 +7,6 @@ public class Item implements IItem {
     private String reference;
     private int depth;
     private String description;
-
     private int height;
     private int length;
 

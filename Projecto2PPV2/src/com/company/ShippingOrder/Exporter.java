@@ -12,7 +12,7 @@ import java.io.IOException;
  * com toda a informacao necessaria a exportar
  */
 public class Exporter implements IExporter {
-    String filePath = "exampleWrite.json";
+    private String filePath = "exampleWrite.json";
 
     @Override
     public void export(IShippingOrder iShippingOrder) throws IOException {
